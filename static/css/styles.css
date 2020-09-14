@@ -1,0 +1,17 @@
+.card-style-sm {
+    width: 156px;
+    height: 108px;
+    background-color: white;
+    padding: 15px;
+    margin: 10px;
+    display: inline-block !important;
+}
+
+.card-style-bg {
+    width: 400px;
+    height: 500px;
+    background-color: white;
+    padding: 15px;
+    margin: 10px;
+    display: inline-block
+}

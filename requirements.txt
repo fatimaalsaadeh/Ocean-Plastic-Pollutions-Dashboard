@@ -1,2 +1,6 @@
 Flask
 Flask-Admin
+plotly
+pandas
+numpy
+json

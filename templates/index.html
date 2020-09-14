@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>PPIO</title>
+    <link rel="stylesheet" type="text/css" href="static/css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <h3 style="margin-left: 90px;color: #1F77B4">Plastic Pollution in Oceans</h3>
+</head>
+<body style="background-color: whitesmoke;">
+<div class="container" style="display: flex; flex-direction: column; margin-left: 80px;">
+    <div class="row flex-display">
+        <div class="four columns">
+            <div class="card card-style-bg">
+                <div class="card-body">
+                    <p class="card-text">Filters</p>
+                </div>
+            </div>
+        </div>
+        <div class="eight columns">
+            <div>
+            <div class="card card-style-sm" >
+                <div class="card-body">
+                    <p class="card-text">Stat1</p>
+                </div>
+            </div>
+            <div class="card card-style-sm">
+                <div class="card-body">
+                    <p class="card-text">Stat2</p>
+                </div>
+            </div>
+            <div class="card card-style-sm">
+                <div class="card-body">
+                    <p class="card-text">Stat3</p>
+                </div>
+            </div>
+                <div class="card card-style-sm">
+                    <div class="card-body">
+                        <p class="card-text">Stat4</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="card" style="color:white; display:inline-block; margin-left: 10px;">
+                    <div class="card-body">
+                        <div class="chart" id="scatter" style="display:inline-block; background:white;">
+                            <script>
+                                var graphs_2 = {{plot[2] | safe}};
+                                Plotly.plot('scatter', graphs_2, {});
+                            </script>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div>
+            <div class="card" style="color:white; display:inline-block; margin-left: 10px">
+                <div class="card-body">
+                    <div class="chart" id="map" style="display:inline-block; background:white;">
+                        <script>
+                            var graphs_2 = {{plot[1] | safe}};
+                            Plotly.plot('map', graphs_2, {});
+                        </script>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="card" style="height: width: 400px; color:white; display:inline-block">
+                <div class="card-body">
+                    <div class="chart" id="bar" style="display:inline-block">
+                        <script>
+                            var graphs = {{plot[0] | safe}};
+                            Plotly.plot('bar', graphs, {});
+
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    document.getElementById('map').on('plotly_hover', function (data) {
+        $.ajax({
+            url: '{{ url_for('create_bar_plot', count=30) }}',
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function (response) {
+                Plotly.deleteTraces('bar', 0);
+                var graphs_2 = JSON.parse(response);
+                Plotly.newPlot('bar', graphs_2);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });
+</script>
+</html>
