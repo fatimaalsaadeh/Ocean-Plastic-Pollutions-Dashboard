@@ -1,15 +1,24 @@
-from flask import Flask, render_template, request
+"""
+Runs the backend for the website.
+
+To run this script, add the hostname as the first argument. For example,
+    python app.py 0.0.0.0
+"""
+
+
+import json
+import numpy as np
+import pandas as pd
 import plotly
+import plotly.express as px
 import plotly.graph_objs as go
 
-import pandas as pd
-import numpy as np
-import json
+from flask import Flask, render_template, request
+from sys import argv
 
 us_cities = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
 
-import plotly.express as px
-
+hostname = argv[1]
 app = Flask(__name__)
 
 
@@ -85,4 +94,4 @@ def create_map():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host=hostname)
