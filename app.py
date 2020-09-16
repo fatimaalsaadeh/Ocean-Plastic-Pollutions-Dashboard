@@ -12,11 +12,20 @@ import pandas as pd
 import plotly
 import plotly.express as px
 import plotly.graph_objs as go
+import sqlite3
 
 from flask import Flask, render_template, request
 from sys import argv
 
-us_cities = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
+
+with sqlite3.connect('data.db') as con:
+    try:
+        us_cities = pd.read_sql('select * from cities', con)
+    except pd.io.sql.DatabaseError:
+        us_cities = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
+        us_cities.to_sql('cities', con)
+        print('Added', len(us_cities), 'rows to cities table')
+
 
 hostname = argv[1]
 app = Flask(__name__)
