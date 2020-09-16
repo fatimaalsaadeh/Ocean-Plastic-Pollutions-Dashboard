@@ -27,7 +27,10 @@ with sqlite3.connect('data.db') as con:
         print('Added', len(us_cities), 'rows to cities table')
 
 
-hostname = argv[1]
+try:
+    hostname = argv[1]
+except:
+    hostname = '0.0.0.0'
 app = Flask(__name__)
 
 
