@@ -6,3 +6,4 @@ env
 .mapbox_token
 .DS_Store
 static/.DS_Store
+.ipynb_checkpoints
