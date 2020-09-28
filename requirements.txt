@@ -4,3 +4,5 @@ plotly
 pandas
 numpy
 json
+plotly.express
+re

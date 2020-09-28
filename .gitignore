@@ -3,3 +3,6 @@
 .DS_Storeenv
 *.db
 env
+.mapbox_token
+.DS_Store
+static/.DS_Store
