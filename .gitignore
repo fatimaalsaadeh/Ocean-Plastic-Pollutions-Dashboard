@@ -7,3 +7,5 @@ env
 .DS_Store
 static/.DS_Store
 *.csv
+.ipynb_checkpoints
+data
