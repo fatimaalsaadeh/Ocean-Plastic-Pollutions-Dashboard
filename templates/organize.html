@@ -25,9 +25,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link href="static/js/jquery.range.css" rel="stylesheet">
-    <script src="static/js/jquery.range.js"></script>
-
     <script type="text/javascript" src="static/js/controller.js">
         var data = {{params[3] | safe}}
         var title = {{params[4] | safe}}
@@ -46,7 +43,6 @@
                 <div class="card-body" style="padding: 0 !important;">
                     <p class="card-text">Filters</p>
                     <div>
-                        <input class="range-slider" type="hidden" value="25,75">
                         <div style="padding-bottom: 10px;">
                             <label for="datepicker" style="color: navy">Event Date: </label>
                             <input id="datepicker" type="text"
@@ -59,19 +55,12 @@
                                name="location" class="search form-control form-control-sm w-75" type="text"
                                placeholder="Beach Name, City, State, Country"
                                aria-label="Search">
-                        <label for="organizationsearch" style="color: navy">Organization: </label>
-                        <input id="organizationsearch" style="display: inline-block;width: 240px !important; margin-left: 18px;margin-top: 5px;"
-                               name="organization" class="orgsearch form-control form-control-sm w-75" type="text"
+                        <label for="organization-dropdown" style="color: navy">Organization: </label>
+                        <input id="organization-dropdown" style="display: inline-block;width: 240px !important;"
+                               name="location" class="search form-control form-control-sm w-75" type="text"
                                placeholder="Organization Name"
                                aria-label="Search">
                         <div>
-                            <label style="color: navy">Show Events By: </label>
-                            <div class="custom-control custom-radio" style="padding-left: 140px;">
-                                <input class="form-check-input" type="checkbox" value="1" id="itemscollected">
-                                <label class="form-check-label" for="itemscollected">
-                                    Number of Items Collected
-                                </label>
-                            </div>
                             <label style="color: navy">Show Results By: </label>
                             <div class="custom-control custom-radio" style="padding-left: 140px;">
                                 <input type="radio" class="custom-control-input" id="country" name="resultsBy" checked>
@@ -92,30 +81,24 @@
         </div>
         <div class="eight columns">
             <div>
-                <div class="card border-dark mb-3 card-style-sm" style="width:139px">
-                    <div class="card-header">Total Volunteers</div>
+                <div class="card border-dark mb-3 card-style-sm" style="width:200px">
+                    <div class="card-header">Average Number of Volunteers You Will Need</div>
                     <div class="card-body text-dark" style="padding-bottom: 0; display: inline-flex">
                         <p class="card-text">{{params[1][0]}}</p>
                         <i class="fa fa-hands-helping" style="padding-left: 25px;padding-top: 15px;"></i>
 
                     </div>
                 </div>
-                <div class="card border-dark mb-3 card-style-sm" style="width:156px">
-                    <div class="card-header">Number of Events</div>
+                <div class="card border-dark mb-3 card-style-sm" style="width:200px">
+                    <div class="card-header">Expected Number of Items to be Collected</div>
                     <div class="card-body text-dark" style="padding-bottom: 0">
                         <p class="card-text">{{params[1][1]}}</p>
                     </div>
                 </div>
-                <div class="card border-dark mb-3 card-style-sm" style="width:166px">
-                    <div class="card-header">Total Items Recorded</div>
+                <div class="card border-dark mb-3 card-style-sm" style="width:200px">
+                    <div class="card-header">Type of Animals you Will Save</div>
                     <div class="card-body text-dark" style="padding-bottom: 0">
-                        <p class="card-text">{{params[1][2]}}</p>
-                    </div>
-                </div>
-                <div class="card border-dark mb-3 card-style-sm" style="width:166px">
-                    <div class="card-header">Avg Meters Covered</div>
-                    <div class="card-body text-dark" style="padding-bottom: 0">
-                        <p class="card-text">{{params[1][3]}}</p>
+                        <p class="card-text">{{params[1][1]}}</p>
                     </div>
                 </div>
             </div>
@@ -141,7 +124,7 @@
                         class="icon-text"></span></span></div><br>
                 <div onclick="showMap()" title="Events Near Me" class="sidebar-div"><span title="Events Near Me"><i class="material-icons">near_me</i><span
                         class="icon-text"></span></span></div><br>
-                <a href="/organize" title="Cleanup Events"><i title="Cleanup Events" class="material-icons">event</i><span
+                <a href="organize.html" title="Cleanup Events"><i title="Cleanup Events" class="material-icons">event</i><span
                         class="icon-text"></span></a></span>
                 </a><br>
                 <a href="#" title="References"><i title="References" class="material-icons">book</i><span
@@ -179,14 +162,6 @@
         <a id="top-link"  style="text-decoration:underline; font-size: x-large; color:red"></a>
 
     </div>
-    <div class="card" style="width: 1125px; color:white; display:inline-block">
-        <div class="card-body">
-            <div class="chart" id="wordc" style="display:inline-block; background:white;">
-                <img src="static/imgs/word.png" alt="word cloud" style="width:1100px;">
-            </div>
-        </div>
-    </div>
-
 </div>
 <div id="infoBox" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -253,8 +228,6 @@
 <script type="text/javascript">
     var data = {{params[3] | safe}}
     var title = {{params[4] | safe}}
-    var orgsearch = {{params[8] | safe}}
-
     document.getElementById("top").innerText = "Top Events Organization in this location: "
     document.getElementById("top-link").href = "https://www.google.com/search?q={{params[5] | safe}}" ;
     document.getElementById("top-link").innerText = "{{params[5] | safe}}!";

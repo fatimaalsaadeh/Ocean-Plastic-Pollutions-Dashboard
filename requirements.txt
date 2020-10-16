@@ -3,6 +3,8 @@ Flask-Admin
 plotly
 pandas
 numpy
-json
 plotly.express
-re
+geocoder
+WordCloud
+STOPWORDS
+matplotlib.pyplot
