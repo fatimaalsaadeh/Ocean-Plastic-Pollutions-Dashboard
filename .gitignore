@@ -8,4 +8,3 @@ env
 static/.DS_Store
 *.csv
 .ipynb_checkpoints
-data
