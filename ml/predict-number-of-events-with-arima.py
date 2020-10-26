@@ -167,6 +167,8 @@ def arima_model_forcasting(events_per_date_df):
     y_truth = events_per_date_df['2018-06-01':]
     mse = ((y_forecasted.values - y_truth['numEvents'].values) ** 2).mean()
     print('The Mean Squared Error of our forecasts is {}'.format(round(mse, 2)))
+    mase = ((y_forecasted.values - y_truth['numEvents'].values) / y_truth['numEvents']).abs().mean()
+    print('The accuracy of our forecasts (using the 1-MASE metric) is {}%'.format(int(100*(1-mase))))
     pred_uc = results.get_forecast(steps=100)
     pred_ci = pred_uc.conf_int()
     ax = events_per_date_df.plot(label='observed', figsize=(14, 7))
