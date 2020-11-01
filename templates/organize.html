@@ -25,7 +25,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <script type="text/javascript" src="static/js/controller.js">
+    <script type="text/javascript" src="static/js/orgController.js">
         var data = {{params[3] | safe}}
         var title = {{params[4] | safe}}
     </script>
@@ -81,7 +81,7 @@
         </div>
         <div class="eight columns">
             <div>
-                <div class="card border-dark mb-3 card-style-sm" style="width:200px">
+                <div class="card border-dark mb-3 card-style-sm" style="width:217px">
                     <div class="card-header">Average Number of Volunteers You Will Need</div>
                     <div class="card-body text-dark" style="padding-bottom: 0; display: inline-flex">
                         <p class="card-text">{{params[1][0]}}</p>
@@ -89,14 +89,14 @@
 
                     </div>
                 </div>
-                <div class="card border-dark mb-3 card-style-sm" style="width:200px">
+                <div class="card border-dark mb-3 card-style-sm" style="width:217px">
                     <div class="card-header">Expected Number of Items to be Collected</div>
                     <div class="card-body text-dark" style="padding-bottom: 0">
                         <p class="card-text">{{params[1][1]}}</p>
                     </div>
                 </div>
-                <div class="card border-dark mb-3 card-style-sm" style="width:200px">
-                    <div class="card-header">Type of Animals you Will Save</div>
+                <div class="card border-dark mb-3 card-style-sm" style="width:217px">
+                    <div class="card-header">Average Meters Expected to Cover</div>
                     <div class="card-body text-dark" style="padding-bottom: 0">
                         <p class="card-text">{{params[1][1]}}</p>
                     </div>
@@ -133,18 +133,7 @@
                         class="icon-text"></span><span></span></a>
             </div>
             <div id="main">
-                <div class="card" style="color:white; display:inline-block; margin-left: 10px;">
-                    <div class="card-body">
-                        <div class="chart" id="bar" style="display:inline-block">
-                            <script>
-                                var graphs = {{params[0][0] | safe}};
-                                Plotly.plot('bar', graphs, {});
-                            </script>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="card" style="width: 582px; color:white; display:inline-block">
+                <div class="card" style="width: 1130px; color:white; display:inline-block">
                     <div class="card-body">
                         <div class="chart" id="scatter" style="display:inline-block; background:white;">
                             <script>

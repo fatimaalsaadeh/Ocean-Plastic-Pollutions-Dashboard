@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>PPIO</title>
+    <link rel="stylesheet" type="text/css" href="static/css/styles.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css"
+          rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="static/js/jquery.range.css" rel="stylesheet">
+    <script src="static/js/jquery.range.js"></script>
+</head>
+<body style="background-color: whitesmoke;">
+<div class="container" style="display: flex; flex-direction: column;max-width: 1500px;">
+    <div class="row">
+        <div>
+            <div id="mySidebar" class="sidebar" style="height: 1000px;">
+                <a href="/" title="Statistics Page" class="sidebar-div"><span title="Statistics Page"><i class="material-icons">insert_chart_outlined</i><span
+                        class="icon-text"></span></span></a><br>
+                <div onclick="showMap()" title="Events Near Me" class="sidebar-div"><span title="Events Near Me"><i class="material-icons">near_me</i><span
+                        class="icon-text"></span></span></div><br>
+                <a href="/organize" title="Cleanup Events"><i title="Cleanup Events" class="material-icons">event</i><span
+                        class="icon-text"></span></a></span>
+                </a><br>
+                <a href="/references" title="References"><i title="References" class="material-icons">book</i><span
+                        class="icon-text"></span></span></a><br>
+                <a href="#" title="Contact"><i title="Contact" class="material-icons">contact_page</i><span
+                        class="icon-text"></span><span></span></a>
+            </div>
+        </div>
+    </div>
+    <div>
+    <div style="width:650px;float: left;margin-left: 200px;margin-top:15px;">
+        <div style="display: inline-block">
+        <a style="float: left;margin: 10px;" href="https://oceanconservancy.org/trash-free-seas/international-coastal-cleanup/start-a-cleanup/do-it-yourself-cleanup-kit/">
+        <div class="card" style="width: 18rem;">
+            <img style="height: 195px" class="card-img-top" src="/static/imgs/Cleanup.jpg" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text" style="color: navy">Want to start your own cleanup? Get started here.</p>
+                <p class="card-text" style="font-size: small; color: navy">oceanconservancy.org</p>
+
+            </div>
+
+        </div>
+        </a>
+
+            <a style="float: left;margin: 10px;margin-bottom: 35px;" href="https://www.epa.gov/beaches/plan-trip-beach">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="/static/imgs/epa.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text" style="color: navy">Plan a Trip to the Beach: stay healthy, prevent pollution</p>
+                        <p class="card-text" style="font-size: small; color: navy">epa.gov</p>
+
+                    </div>
+
+                </div>
+            </a>
+
+            <a style="float: left;margin-right: 20px;margin-left: 10px;" href="https://blog.terracycle.com/2018/06/08/i-took-part-in-a-beach-clean-up-and-this-is-what-i-learnt/">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="/static/imgs/took_a_part.png" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text" style="color: navy">Hear from a Volunteer: I took part in a beach clean-up and this is what I learnt</p>
+                        <p class="card-text" style="font-size: small; color: navy">blog.terracycle.com</p>
+
+                    </div>
+
+                </div>
+            </a>
+
+            <a style="" href="https://www.youtube.com/watch?v=HQTUWK7CM-Y">
+                <div class="card" style="width: 18rem;height: 331px;">
+                    <img style= "height: 185px" class="card-img-top" src="/static/imgs/nationalg.png" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text" style="color: navy">How We Can Keep Plastics Out of Our Ocean - Video </p>
+                        <p class="card-text" style="font-size: small; color: navy">National Geographic</p>
+
+                    </div>
+
+                </div>
+            </a>
+        </div>
+    </div>
+    <div>
+        <a style="float: right !important;" class="twitter-timeline" data-width="400" data-height="900" href="https://twitter.com/FatimaSaadeh993/lists/ocean-plastics?ref_src=twsrc%5Etfw">A Twitter List by FatimaSaadeh993</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+    </div>
+</div>
+<div id="infoBox" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <th scope="row">Event Location</th>
+                        <td ><a id="event-location" href=""></a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Event Organization</th>
+                        <td ><a id="organization" href=""></a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Event Type</th>
+                        <td id="event-type">Jacob</td>
+
+                    </tr>
+                    <tr>
+                        <th scope="row">Event Date:</th>
+                        <td id="date-record"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Total Items Recorded:</th>
+                        <td id="total-items-recorded"></td>
+                    </tr>
+                    <tr id="description-block" style="display: none">
+                        <th scope="row">Description:</th>
+                        <td id="description"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="events_near_me" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="near_me_modal-title">Events Near Me</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="chart" id="near_me_map" style="display:inline-block; background:white;">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+
+</html>
