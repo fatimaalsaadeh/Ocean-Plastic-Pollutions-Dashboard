@@ -22,20 +22,20 @@ warnings.filterwarnings("ignore")
 import pandas as pd
 import statsmodels.api as sm
 
-title = ""
-with sqlite3.connect('ocean_plastic.db') as con:
-    try:
-        all_data = pd.read_sql('select * from plastic_all_data', con)
-        top_10 = pd.read_sql('select * from plastic_top_10', con)
-    except pd.io.sql.DatabaseError:
-        test = pd.read_csv("test.csv")
-        test.to_sql('forecast_params', con)
-        all_data = pd.read_csv("all-cleanups.csv")
-        all_data.to_sql('plastic_all_data', con)
-        print('Added', len(all_data), 'rows to all_data table')
-        top_10 = pd.read_csv("https://opendata.arcgis.com/datasets/7afcc89e5a0f4c339ddf7b4bf6fabe3d_0.csv")
-        top_10.to_sql('plastic_top_10', con)
-        print('Added', len(top_10), 'rows to plastic_top_10 table')
+# title = ""
+# with sqlite3.connect('ocean_plastic.db') as con:
+#     try:
+#         all_data = pd.read_sql('select * from plastic_all_data', con)
+#         top_10 = pd.read_sql('select * from plastic_top_10', con)
+#     except pd.io.sql.DatabaseError:
+#         test = pd.read_csv("test.csv")
+#         test.to_sql('forecast_params', con)
+#         all_data = pd.read_csv("all-cleanups.csv")
+#         all_data.to_sql('plastic_all_data', con)
+#         print('Added', len(all_data), 'rows to all_data table')
+#         top_10 = pd.read_csv("https://opendata.arcgis.com/datasets/7afcc89e5a0f4c339ddf7b4bf6fabe3d_0.csv")
+#         top_10.to_sql('plastic_top_10', con)
+#         print('Added', len(top_10), 'rows to plastic_top_10 table')
 
 try:
     hostname = argv[1]
