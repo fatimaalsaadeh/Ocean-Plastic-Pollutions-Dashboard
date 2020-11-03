@@ -3,6 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>PPIO</title>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="static/css/styles.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -25,10 +26,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <script type="text/javascript" src="static/js/controller.js">
+    <script type="text/javascript" src="static/js/orgController.js">
         var data = {{params[3] | safe}}
         var title = {{params[4] | safe}}
     </script>
+    <link href="static/js/jquery.range.css" rel="stylesheet">
+    <script src="static/js/jquery.range.js"></script>
 </head>
 <body style="background-color: whitesmoke;">
 <div class="container" style="display: flex; flex-direction: column;">
@@ -41,7 +44,6 @@
         <div class="four columns">
             <div class="card card-style-bg" style="height: 507px;">
                 <div class="card-body" style="padding: 0 !important;">
-                    <p class="card-text">Filters</p>
                     <div>
                         <div style="padding-bottom: 10px;">
                             <label for="datepicker" style="color: navy">Event Date: </label>
@@ -56,7 +58,7 @@
                                placeholder="Beach Name, City, State, Country"
                                aria-label="Search">
                         <label for="organization-dropdown" style="color: navy">Organization: </label>
-                        <input id="organization-dropdown" style="display: inline-block;width: 240px !important;"
+                        <input id="organization-dropdown" style="display: inline-block;width: 240px !important;margin-left: 20px;"
                                name="location" class="search form-control form-control-sm w-75" type="text"
                                placeholder="Organization Name"
                                aria-label="Search">
@@ -71,9 +73,11 @@
                                 <label class="custom-control-label" for="beach">Beach</label>
                             </div>
                         </div>
-                        <button id="update" onclick="update()" type="button" class="btn btn-light" style="color:navy">
-                            Search
-                        </button>
+                        <div style="padding-top:100px">
+                            <button id="update" onclick="update()" type="button" class="btn btn-light" style="color:white;background-color: darkseagreen">
+                                Search
+                            </button>
+                        </div>
                         <p id="warning" color="red"></p>
                     </div>
                 </div>
@@ -81,22 +85,22 @@
         </div>
         <div class="eight columns">
             <div>
-                <div class="card border-dark mb-3 card-style-sm" style="width:200px">
+                <div class="card border-dark mb-3 card-style-sm" style="width:217px">
                     <div class="card-header">Average Number of Volunteers You Will Need</div>
-                    <div class="card-body text-dark" style="padding-bottom: 0; display: inline-flex">
+                    <div class="card-body text-dark" style="padding-bottom: 0; display: inline-flex;width: 300px;">
                         <p class="card-text">{{params[1][0]}}</p>
                         <i class="fa fa-hands-helping" style="padding-left: 25px;padding-top: 15px;"></i>
 
                     </div>
                 </div>
-                <div class="card border-dark mb-3 card-style-sm" style="width:200px">
+                <div class="card border-dark mb-3 card-style-sm" style="width:217px">
                     <div class="card-header">Expected Number of Items to be Collected</div>
                     <div class="card-body text-dark" style="padding-bottom: 0">
                         <p class="card-text">{{params[1][1]}}</p>
                     </div>
                 </div>
-                <div class="card border-dark mb-3 card-style-sm" style="width:200px">
-                    <div class="card-header">Type of Animals you Will Save</div>
+                <div class="card border-dark mb-3 card-style-sm" style="width:217px">
+                    <div class="card-header">Average Meters Expected to Cover</div>
                     <div class="card-body text-dark" style="padding-bottom: 0">
                         <p class="card-text">{{params[1][1]}}</p>
                     </div>
@@ -104,7 +108,7 @@
             </div>
             <div>
                 <div class="card" style="color:white; display:inline-block; margin-left: 10px;">
-                    <div class="card-body">
+                    <div class="card-body" style="padding-bottom: 0rem;padding-top: .8rem;">
                         <div class="chart" id="map" style="display:inline-block; background:white;">
                             <script>
                                 var graphs_2 = {{params[0][1] | safe}};
@@ -112,6 +116,8 @@
                             </script>
                         </div>
                     </div>
+                    <a href="/getData?data_type='orgmap'"  title="Download"><i style="color: lightgray" title="Download" class="material-icons">get_app</i><span
+                            class="icon-text"></span></a></span>
                 </div>
             </div>
         </div>
@@ -120,32 +126,21 @@
     <div class="row">
         <div>
             <div id="mySidebar" class="sidebar">
-                <div onclick="reset()" title="Statistics Page" class="sidebar-div"><span title="Statistics Page"><i class="material-icons">insert_chart_outlined</i><span
-                        class="icon-text"></span></span></div><br>
+                <a href="/" title="Statistics Page"><i title="Statistics Page" class="material-icons">insert_chart_outlined</i><span
+                        class="icon-text"></span></a></span>
                 <div onclick="showMap()" title="Events Near Me" class="sidebar-div"><span title="Events Near Me"><i class="material-icons">near_me</i><span
                         class="icon-text"></span></span></div><br>
-                <a href="organize.html" title="Cleanup Events"><i title="Cleanup Events" class="material-icons">event</i><span
+                <a href="/organize" title="Cleanup Events"><i title="Cleanup Events" class="material-icons">event</i><span
                         class="icon-text"></span></a></span>
                 </a><br>
-                <a href="#" title="References"><i title="References" class="material-icons">book</i><span
+                <a href="/references" title="References"><i title="References" class="material-icons">book</i><span
                         class="icon-text"></span></span></a><br>
-                <a href="#" title="Contact"><i title="Contact" class="material-icons">contact_page</i><span
+                <a href="/contact" title="Contact"><i title="Contact" class="material-icons">contact_page</i><span
                         class="icon-text"></span><span></span></a>
             </div>
             <div id="main">
-                <div class="card" style="color:white; display:inline-block; margin-left: 10px;">
-                    <div class="card-body">
-                        <div class="chart" id="bar" style="display:inline-block">
-                            <script>
-                                var graphs = {{params[0][0] | safe}};
-                                Plotly.plot('bar', graphs, {});
-                            </script>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="card" style="width: 582px; color:white; display:inline-block">
-                    <div class="card-body">
+                <div class="card" style="margin-left: 10px;width: 1130px; color:white; display:inline-block">
+                    <div class="card-body" style="padding-bottom: 0rem;padding-top: .8rem;">
                         <div class="chart" id="scatter" style="display:inline-block; background:white;">
                             <script>
                                 var graphs_2 = {{params[0][2] | safe}};
@@ -153,13 +148,18 @@
                             </script>
                         </div>
                     </div>
+                    <a href="/getData?data_type='orgscatter'"  title="Download"><i style="color: lightgray" title="Download" class="material-icons">get_app</i><span
+                            class="icon-text"></span></a></span>
                 </div>
+
             </div>
         </div>
     </div>
-    <div id="top-organization" style="display: inline-block; text-align: center; color: red">
-        <h4 id="top" style="text-align: center; display: inline-block" > </h4>
-        <a id="top-link"  style="text-decoration:underline; font-size: x-large; color:red"></a>
+    <div id="plan-events" style="display: inline-block; text-align: center; color: red">
+        <h4 id="plan" style="text-align: center; display: inline-block" >
+            Be Part of it:
+        </h4>
+        <a id="plan-link" href="#" onclick="clicked();return false;" style="text-decoration:underline; font-size: x-large; color:red"> Plan a Cleanup Event</a>
 
     </div>
 </div>
@@ -211,27 +211,89 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="near_me_modal-title">Events Near Me</h5>
+                <h5 class="modal-title" id="near_me_modal-title">Plan an Event</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"></span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="chart" id="near_me_map" style="display:inline-block; background:white;">
+                <h8 class="modal-title">Tell Us About it!</h8>
+                <div style="padding-bottom: 10px;">
+                    <label for="datepicker1" style="color: navy">Event Date: </label>
+                    <input id="datepicker1" type="text"
+                           class="search form-control form-control-sm ui-autocomplete-input" name="datepicker"
+                           placeholder="mm-dd-yyyy"
+                           style="width: 130px;display: inline-block;margin-left: 32px;"/><br>
                 </div>
-
+                <div style="padding-bottom: 10px;">
+                <label for="beach-location1" style="color: navy">Beach Location: </label>
+                <input id="beach-location1" style="display: inline-block;width: 240px !important;"
+                       name="location" class="search form-control form-control-sm w-75" type="text"
+                       placeholder="Beach Name, City, State, Country"
+                       aria-label="Search">
+                </div>
+                <div style="padding-bottom: 10px;">
+                <label for="organization-dropdown1" style="color: navy">Organization: </label>
+                <input id="organization-dropdown1" style="display: inline-block;width: 240px !important;margin-left: 20px;"
+                       name="location" class="search form-control form-control-sm w-75" type="text"
+                       placeholder="Organization Name"
+                       aria-label="Search">
+                </div>
+                <div style="padding-bottom: 10px;">
+                    <label for="invitation" style="color: navy">Invitation Link: </label>
+                    <input id="invitation" style="display: inline-block;width: 240px !important;margin-left: 20px;"
+                           name="invitation" class="search form-control form-control-sm w-75" type="text"
+                           placeholder="Invitation Link"
+                           aria-label="Search">
+                </div>
+                <button id="save_it" onclick="save_event()" type="button" class="btn btn-light" style="color:navy; background-color:darkseagreen">
+                    Save
+                </button>
+                or
+                <button id="plan_it" onclick="location.href='https://www.facebook.com/events/create/'" type="button" class="btn btn-light" style="color:navy;background-color: aliceblue;">
+                    Plan it
+                </button>
             </div>
         </div>
     </div>
 </div>
 </body>
 <script type="text/javascript">
+    function clicked(){
+        $("#events_near_me").modal();
+    }
+    function save_event(){
+        event_date = document.getElementById('datepicker1').value
+        event_location = document.getElementById('beach-location1').value
+        event_organization = document.getElementById('organization-dropdown1').value
+        invitation = document.getElementById('invitation').value
+        var params = "event_date=\'" + event_date + "\'&event_location=\'" + event_location + "\'&event_organization=\'" + event_organization+ "\'&invitation=\'" + invitation;
+        var url_name = "/saveEvent?" + params;
+        $.ajax({
+            url: url_name,
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function (response) {
+
+            },
+            error: function (error) {
+            }
+
+        });
+    }
     var data = {{params[3] | safe}}
     var title = {{params[4] | safe}}
-    document.getElementById("top").innerText = "Top Events Organization in this location: "
-    document.getElementById("top-link").href = "https://www.google.com/search?q={{params[5] | safe}}" ;
-    document.getElementById("top-link").innerText = "{{params[5] | safe}}!";
 </script>
-
+<footer id="footer" class="footer-1">
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>census.opportunityproject@census.gov © 2020. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
 </html>

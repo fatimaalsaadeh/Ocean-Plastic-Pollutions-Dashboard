@@ -1,10 +1,16 @@
 .idea
 .idea/*
 .DS_Storeenv
-*.db
 env
 .mapbox_token
 .DS_Store
 static/.DS_Store
 *.csv
 .ipynb_checkpoints
+data
+__pycache__/organize.cpython-38.pyc
+Procfile
+__pycache__/app.cpython-37.pyc
+__pycache__/app.cpython-38.pyc
+__pycache__/organize.cpython-37.pyc
+ocean_plastic.db
