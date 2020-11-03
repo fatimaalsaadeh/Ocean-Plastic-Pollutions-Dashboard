@@ -7,14 +7,6 @@ plotly.express
 geocoder
 WordCloud
 STOPWORDS
-matplotlib.pyplot
-re
-sklearn.linear_model
-sqlite3
-warnings
-matplotlib.pyplot
-io
-sys
+scikit-learn==0.21.3
 datetime
-plotly.graph_objects
-math
+plotly

@@ -17,10 +17,8 @@ from sys import argv
 from sklearn.linear_model import LinearRegression
 import sqlite3
 import warnings
-import matplotlib.pyplot as plt
 
 warnings.filterwarnings("ignore")
-plt.style.use('fivethirtyeight')
 import pandas as pd
 import statsmodels.api as sm
 
