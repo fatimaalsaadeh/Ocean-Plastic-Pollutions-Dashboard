@@ -595,8 +595,7 @@ def create_map():
     fig.update_traces(
         hovertemplate=None
     )
-    fig.update_layout(mapbox_style="mapbox://styles/falsaadeh/ckf7f7mx70d6d19qkal4k4u99",
-                      mapbox=dict(
+    fig.update_layout(mapbox=dict(
                           accesstoken=open(".mapbox_token").read(),
                           center=go.layout.mapbox.Center(
                               lat=lat,
@@ -659,8 +658,7 @@ def find_nearest_beach():
             fig.update_traces(
                 hovertemplate=None
             )
-            fig.update_layout(mapbox_style="mapbox://styles/falsaadeh/ckf7f7mx70d6d19qkal4k4u99",
-                              mapbox=dict(
+            fig.update_layout(mapbox=dict(
                                   accesstoken=open(".mapbox_token").read(),
                                   center=go.layout.mapbox.Center(
                                       lat=g1[0],
