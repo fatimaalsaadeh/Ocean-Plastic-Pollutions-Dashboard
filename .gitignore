@@ -1,7 +1,6 @@
 .idea
 .idea/*
 .DS_Storeenv
-*.db
 env
 .mapbox_token
 .DS_Store
