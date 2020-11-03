@@ -9,3 +9,4 @@ static/.DS_Store
 *.csv
 .ipynb_checkpoints
 data
+__pycache__/organize.cpython-38.pyc

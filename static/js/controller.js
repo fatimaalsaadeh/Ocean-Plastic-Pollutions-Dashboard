@@ -1,3 +1,6 @@
+var mapData = null;
+var scatterData = null;
+var barData = null;
 $(document).ready(function () {
     var byLocation = document.querySelector('input[name = "resultsBy"]:checked').id == "beach";
     var beach = document.getElementById("beach-location").value;
@@ -120,10 +123,96 @@ function showMap(){
             graphs_1 = JSON.parse(respnse['graph']);
             city = respnse['city'];
             country_code = respnse['country_code'];
+            locationn = respnse['first_loc'];
             Plotly.deleteTraces('map', 0);
             Plotly.newPlot('map', graphs_1);
+            params = 'location=\'' + locationn + "\'&byLocation=" + true;
+            var url_name1 = "/create_scatter?" + params;
+            var url_name2 = "/create_plot?" + params;
+            var url_name3 = "/get_stats?" + params;
+            var url_name4 = "/get_title?" + params;
+            var url_name5 = "/get_top_orgs?" + params;
             onMapHover();
             //update(true, city, country_code);
+            $.ajax({
+                url: url_name1,
+                data: $('form').serialize(),
+                type: 'POST',
+                success: function (response) {
+                    Plotly.deleteTraces('scatter', 0);
+                    graphs_1 = JSON.parse(response);
+                    Plotly.newPlot('scatter', graphs_1);
+                    document.getElementById('scatter').on('plotly_click', function (data) {
+                        dataHoverInfoBox(data);
+                    });
+                    $.ajax({
+                        url: url_name2,
+                        data: $('form').serialize(),
+                        type: 'POST',
+                        success: function (response) {
+                            graphs_2 = JSON.parse(response);
+                            Plotly.deleteTraces('bar', 0);
+                            Plotly.newPlot('bar', graphs_2);
+                            $.ajax({
+                                url: url_name3,
+                                data: $('form').serialize(),
+                                type: 'POST',
+                                success: function (response) {
+                                    response3 = JSON.parse(response);
+                                    document.getElementsByClassName("card-text")[0].innerText = response3[0];
+                                    document.getElementsByClassName("card-text")[1].innerText = response3[1];
+                                    document.getElementsByClassName("card-text")[2].innerText = response3[2];
+                                    document.getElementsByClassName("card-text")[3].innerText = response3[3];
+                                    $.ajax({
+                                        url: url_name4,
+                                        data: $('form').serialize(),
+                                        type: 'POST',
+                                        success: function (response) {
+                                            title = JSON.parse(response)[0];
+                                            beachLocation = JSON.parse(response)[1];
+                                            cityLocation = JSON.parse(response)[2];
+                                            countryLocation =JSON.parse(response)[3];
+                                            document.getElementById("beach-l").innerText = beachLocation
+                                            document.getElementById("city-l").innerText = cityLocation
+                                            document.getElementById("country-l").innerText = countryLocation
+                                            $.ajax({
+                                                url: url_name5,
+                                                data: $('form').serialize(),
+                                                type: 'POST',
+                                                success: function (response) {
+                                                    console.log(response);
+                                                    if (response.length>0) {
+                                                        document.getElementById("top").innerText = "Top Events Organization in this location: "
+                                                        document.getElementById("top-link").href = "https://www.google.com/search?q=" + response;
+                                                        document.getElementById("top-link").innerText = response +"!";
+                                                    }
+                                                    else
+                                                        document.getElementById("top").innerText = "";
+                                                },
+                                                error: function (error) {
+                                                }});
+
+                                        },
+                                        error: function (error) {
+                                        }
+
+                                    });
+                                },
+                                error: function (error) {
+                                    console.log(error);
+                                }
+                            });
+
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
         },
         error: function (error) {
         }
@@ -187,10 +276,10 @@ function onMapHover(){
                                 type: 'POST',
                                 success: function (response) {
                                     response3 = JSON.parse(response);
-                                    document.getElementsByClassName("card-text")[1].innerText = response3[0];
-                                    document.getElementsByClassName("card-text")[2].innerText = response3[1];
-                                    document.getElementsByClassName("card-text")[3].innerText = response3[2];
-                                    document.getElementsByClassName("card-text")[4].innerText = response3[3];
+                                    document.getElementsByClassName("card-text")[0].innerText = response3[0];
+                                    document.getElementsByClassName("card-text")[1].innerText = response3[1];
+                                    document.getElementsByClassName("card-text")[2].innerText = response3[2];
+                                    document.getElementsByClassName("card-text")[3].innerText = response3[3];
                                     $.ajax({
                                         url: url_name4,
                                         data: $('form').serialize(),
@@ -277,10 +366,10 @@ function reset(){
                         type: 'POST',
                         success: function (response) {
                             response3 = JSON.parse(response);
-                            document.getElementsByClassName("card-text")[1].innerText = response3[0];
-                            document.getElementsByClassName("card-text")[2].innerText = response3[1];
-                            document.getElementsByClassName("card-text")[3].innerText = response3[2];
-                            document.getElementsByClassName("card-text")[4].innerText = response3[3];
+                            document.getElementsByClassName("card-text")[0].innerText = response3[0];
+                            document.getElementsByClassName("card-text")[1].innerText = response3[1];
+                            document.getElementsByClassName("card-text")[2].innerText = response3[2];
+                            document.getElementsByClassName("card-text")[3].innerText = response3[3];
                             $.ajax({
                                 url: url_name4,
                                 data: $('form').serialize(),
@@ -339,7 +428,7 @@ function update(byName = false, city = null, country_code = null, start_year=nul
         if (beach.length > 0)
             byLocation = true;
         else byLocation = false;
-        params += "location=\'" + beach + "\'&byLocation=" + byLocation + "";
+        params += "location=\'" + beach + "\'&byLocation=" + byLocation + "&city="+city;
         if (datepicker.length > 0) {
             month = datepicker.split("/")[0];
             year = datepicker.split("/")[2];
@@ -398,10 +487,10 @@ function update(byName = false, city = null, country_code = null, start_year=nul
                             response3 = JSON.parse(response);
                             if (response3[0] && response3[0].length <= 0)
                                 response3[0] = "No information"
-                            document.getElementsByClassName("card-text")[1].innerText = response3[0];
-                            document.getElementsByClassName("card-text")[2].innerText = response3[1];
-                            document.getElementsByClassName("card-text")[3].innerText = response3[2];
-                            document.getElementsByClassName("card-text")[4].innerText = response3[3];
+                            document.getElementsByClassName("card-text")[0].innerText = response3[0];
+                            document.getElementsByClassName("card-text")[1].innerText = response3[1];
+                            document.getElementsByClassName("card-text")[2].innerText = response3[2];
+                            document.getElementsByClassName("card-text")[3].innerText = response3[3];
                             $.ajax({
                                 url: url_name4,
                                 data: $('form').serialize(),
@@ -447,4 +536,25 @@ function update(byName = false, city = null, country_code = null, start_year=nul
             document.getElementById("warning").innerText = "No results for the entered filters";
         }
     });
+}
+
+function downloadData(type){
+    url_name ="/getData?data_type="+type
+    $.ajax({
+        url: url_name,
+        data: $('form').serialize(),
+        type: 'POST',
+        success: function (response) {
+            map_data = response;
+            var a         = document.createElement('a');
+            a.href        = 'data:attachment/csv,' +  map_data;
+            a.target      = '_blank';
+            a.download    = 'mapData.csv';
+            document.body.appendChild(a);
+            a.click();
+
+        },
+        error: function (error) {
+        }});
+
 }

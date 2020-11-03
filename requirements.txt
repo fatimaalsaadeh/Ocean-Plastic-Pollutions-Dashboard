@@ -8,3 +8,13 @@ geocoder
 WordCloud
 STOPWORDS
 matplotlib.pyplot
+re
+sklearn.linear_model
+sqlite3
+warnings
+matplotlib.pyplot
+io
+sys
+datetime
+plotly.graph_objects
+math

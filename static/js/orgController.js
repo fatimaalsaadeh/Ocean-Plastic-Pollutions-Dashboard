@@ -51,6 +51,11 @@ $(document).ready(function () {
         startDate: '-6y'
     });
 
+    $("#datepicker1").datepicker({
+        format: "mm/dd/yyyy",
+        startDate: '-6y'
+    });
+
 
 
     onMapHover();
@@ -157,11 +162,9 @@ function onMapHover(){
                 year = datepicker.split("/")[2];
                 params += "&month=\'" + month + "\'"+"&year=\'"+year+"\'";
             }
-            var url_name1 = "/create_scatter?" + params;
-            var url_name2 = "/create_plot?" + params;
-            var url_name3 = "/get_stats?" + params;
+            var url_name1 = "/predScatter?" + params;
+            var url_name3 = "/predStats?" + params;
             var url_name4 = "/get_title?" + params;
-            var url_name5 = "/get_top_orgs?" + params;
             $.ajax({
                 url: url_name1,
                 data: $('form').serialize(),
@@ -174,63 +177,32 @@ function onMapHover(){
                         dataHoverInfoBox(data);
                     });
                     $.ajax({
-                        url: url_name2,
+                        url: url_name3,
                         data: $('form').serialize(),
                         type: 'POST',
                         success: function (response) {
-                            graphs_2 = JSON.parse(response);
-                            Plotly.deleteTraces('bar', 0);
-                            Plotly.newPlot('bar', graphs_2);
+                            response3 = JSON.parse(response);
+                            document.getElementsByClassName("card-text")[0].innerText = response3[0];
+                            document.getElementsByClassName("card-text")[1].innerText = response3[1];
+                            document.getElementsByClassName("card-text")[2].innerText = response3[2];
                             $.ajax({
-                                url: url_name3,
+                                url: url_name4,
                                 data: $('form').serialize(),
                                 type: 'POST',
                                 success: function (response) {
-                                    response3 = JSON.parse(response);
-                                    document.getElementsByClassName("card-text")[1].innerText = response3[0];
-                                    document.getElementsByClassName("card-text")[2].innerText = response3[1];
-                                    document.getElementsByClassName("card-text")[3].innerText = response3[2];
-                                    document.getElementsByClassName("card-text")[4].innerText = response3[3];
-                                    $.ajax({
-                                        url: url_name4,
-                                        data: $('form').serialize(),
-                                        type: 'POST',
-                                        success: function (response) {
-                                            title = JSON.parse(response)[0];
-                                            beachLocation = JSON.parse(response)[1];
-                                            cityLocation = JSON.parse(response)[2];
-                                            countryLocation =JSON.parse(response)[3];
-                                            document.getElementById("beach-l").innerText = beachLocation
-                                            document.getElementById("city-l").innerText = cityLocation
-                                            document.getElementById("country-l").innerText = countryLocation
-                                            $.ajax({
-                                                url: url_name5,
-                                                data: $('form').serialize(),
-                                                type: 'POST',
-                                                success: function (response) {
-                                                    console.log(response);
-                                                    if (response.length>0) {
-                                                        document.getElementById("top").innerText = "Top Events Organization in this location: "
-                                                        document.getElementById("top-link").href = "https://www.google.com/search?q=" + response;
-                                                        document.getElementById("top-link").innerText = response +"!";
-                                                    }
-                                                    else
-                                                        document.getElementById("top").innerText = "";
-                                                },
-                                                error: function (error) {
-                                                }});
+                                    title = JSON.parse(response)[0];
+                                    beachLocation = JSON.parse(response)[1];
+                                    cityLocation = JSON.parse(response)[2];
+                                    countryLocation =JSON.parse(response)[3];
+                                    document.getElementById("beach-l").innerText = beachLocation
+                                    document.getElementById("city-l").innerText = cityLocation
+                                    document.getElementById("country-l").innerText = countryLocation
 
-                                        },
-                                        error: function (error) {
-                                        }
-
-                                    });
                                 },
                                 error: function (error) {
-                                    console.log(error);
                                 }
-                            });
 
+                            });
                         },
                         error: function (error) {
                             console.log(error);
@@ -250,9 +222,7 @@ function reset(){
     var graphs_1;
     var graphs_2;
     var url_name1 = "/create_scatter";
-    var url_name2 = "/create_plot";
     var url_name3 = "/get_stats";
-    var url_name4 = "/get_top_orgs";
     var url_name5 = "/create_map";
     $.ajax({
         url: url_name5,
@@ -264,58 +234,28 @@ function reset(){
             Plotly.newPlot('map', graphs_2);
             onMapHover()
             $.ajax({
-                url: url_name2,
+                url: url_name3,
                 data: $('form').serialize(),
                 type: 'POST',
                 success: function (response) {
-                    graphs_2 = JSON.parse(response);
-                    Plotly.deleteTraces('bar', 0);
-                    Plotly.newPlot('bar', graphs_2);
+                    response3 = JSON.parse(response);
+                    document.getElementsByClassName("card-text")[0].innerText = response3[0];
+                    document.getElementsByClassName("card-text")[1].innerText = response3[1];
+                    document.getElementsByClassName("card-text")[2].innerText = response3[2];
                     $.ajax({
-                        url: url_name3,
+                        url: url_name1,
                         data: $('form').serialize(),
                         type: 'POST',
                         success: function (response) {
-                            response3 = JSON.parse(response);
-                            document.getElementsByClassName("card-text")[1].innerText = response3[0];
-                            document.getElementsByClassName("card-text")[2].innerText = response3[1];
-                            document.getElementsByClassName("card-text")[3].innerText = response3[2];
-                            document.getElementsByClassName("card-text")[4].innerText = response3[3];
-                            $.ajax({
-                                url: url_name4,
-                                data: $('form').serialize(),
-                                type: 'POST',
-                                success: function (response) {
-                                    if (response.length>0) {
-                                        document.getElementById("top").innerText = "Top Events Organization in this location: "
-                                        document.getElementById("top-link").href = "https://www.google.com/search?q=" + response;
-                                        document.getElementById("top-link").innerText = response +"!";
-                                    }
-                                    else
-                                        document.getElementById("top").innerText = "";
-                                    $.ajax({
-                                        url: url_name1,
-                                        data: $('form').serialize(),
-                                        type: 'POST',
-                                        success: function (response) {
-                                            Plotly.deleteTraces('scatter', 0);
-                                            graphs_1 = JSON.parse(response);
-                                            Plotly.newPlot('scatter', graphs_1);
-                                            document.getElementById('scatter').on('plotly_click', function (data) {
-                                                dataHoverInfoBox(data)
-                                            });
-                                        },
-                                        error: function (error) {
-                                        }});
-                                },
-                                error: function (error) {
-                                }});
+                            Plotly.deleteTraces('scatter', 0);
+                            graphs_1 = JSON.parse(response);
+                            Plotly.newPlot('scatter', graphs_1);
+                            document.getElementById('scatter').on('plotly_click', function (data) {
+                                dataHoverInfoBox(data)
+                            });
                         },
                         error: function (error) {
-                            document.getElementById("warning").innerText = "No results for the entered filters";
-                        }
-                    });
-
+                        }});
                 },
                 error: function (error) {
                     document.getElementById("warning").innerText = "No results for the entered filters";
@@ -369,9 +309,7 @@ function update(byName = false, city = null, country_code = null, start_year=nul
     var graphs_1;
     var graphs_2;
     var url_name1 = "/create_scatter?" + params;
-    var url_name2 = "/create_plot?" + params;
     var url_name3 = "/get_stats?" + params;
-    var url_name4 = "/get_top_orgs?" + params;
     var url_name5 = "/create_map?" + params;
     $.ajax({
         url: url_name5,
@@ -383,60 +321,30 @@ function update(byName = false, city = null, country_code = null, start_year=nul
             Plotly.newPlot('map', graphs_2);
             onMapHover()
             $.ajax({
-                url: url_name2,
+                url: url_name3,
                 data: $('form').serialize(),
                 type: 'POST',
                 success: function (response) {
-                    graphs_2 = JSON.parse(response);
-                    Plotly.deleteTraces('bar', 0);
-                    Plotly.newPlot('bar', graphs_2);
+                    response3 = JSON.parse(response);
+                    if (response3[0] && response3[0].length <= 0)
+                        response3[0] = "No information"
+                    document.getElementsByClassName("card-text")[0].innerText = response3[0];
+                    document.getElementsByClassName("card-text")[1].innerText = response3[1];
+                    document.getElementsByClassName("card-text")[2].innerText = response3[2];
                     $.ajax({
-                        url: url_name3,
+                        url: url_name1,
                         data: $('form').serialize(),
                         type: 'POST',
                         success: function (response) {
-                            response3 = JSON.parse(response);
-                            if (response3[0] && response3[0].length <= 0)
-                                response3[0] = "No information"
-                            document.getElementsByClassName("card-text")[1].innerText = response3[0];
-                            document.getElementsByClassName("card-text")[2].innerText = response3[1];
-                            document.getElementsByClassName("card-text")[3].innerText = response3[2];
-                            document.getElementsByClassName("card-text")[4].innerText = response3[3];
-                            $.ajax({
-                                url: url_name4,
-                                data: $('form').serialize(),
-                                type: 'POST',
-                                success: function (response) {
-                                    if (response.length>0) {
-                                        document.getElementById("top").innerText = "Top Events Organization in this location: "
-                                        document.getElementById("top-link").href = "https://www.google.com/search?q=" + response;
-                                        document.getElementById("top-link").innerText = response +"!";
-                                    }
-                                    else
-                                        document.getElementById("top").innerText = "";
-                                    $.ajax({
-                                        url: url_name1,
-                                        data: $('form').serialize(),
-                                        type: 'POST',
-                                        success: function (response) {
-                                            Plotly.deleteTraces('scatter', 0);
-                                            graphs_1 = JSON.parse(response);
-                                            Plotly.newPlot('scatter', graphs_1);
-                                            document.getElementById('scatter').on('plotly_click', function (data) {
-                                                dataHoverInfoBox(data)
-                                            });
-                                        },
-                                        error: function (error) {
-                                        }});
-                                },
-                                error: function (error) {
-                                }});
+                            Plotly.deleteTraces('scatter', 0);
+                            graphs_1 = JSON.parse(response);
+                            Plotly.newPlot('scatter', graphs_1);
+                            document.getElementById('scatter').on('plotly_click', function (data) {
+                                dataHoverInfoBox(data)
+                            });
                         },
                         error: function (error) {
-                            document.getElementById("warning").innerText = "No results for the entered filters";
-                        }
-                    });
-
+                        }});
                 },
                 error: function (error) {
                     document.getElementById("warning").innerText = "No results for the entered filters";

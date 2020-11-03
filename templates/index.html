@@ -3,6 +3,8 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>PPIO</title>
+    <script src="https://cdn.jsdelivr.net/npm/json2csv@4.2.1"></script>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="static/css/styles.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -44,7 +46,6 @@
         <div class="four columns">
             <div class="card card-style-bg" style="height: 507px;">
                 <div class="card-body" style="padding: 0 !important;">
-                    <p class="card-text">Filters</p>
                     <div>
                         <input class="range-slider" type="hidden" value="25,75">
                         <div style="padding-bottom: 10px;">
@@ -82,12 +83,14 @@
                                 <label class="custom-control-label" for="beach">Beach</label>
                             </div>
                         </div>
-                        <button id="update" onclick="update()" type="button" class="btn btn-light" style="color:white;background-color: darkseagreen">
-                            Search
-                        </button>
-                        <button id="reset" onclick="reset()" type="button" class="btn btn-light" style="color:white;background-color: darkgray">
-                            Reset
-                        </button>
+                        <div style="padding-top:100px">
+                            <button id="update" onclick="update()" type="button" class="btn btn-light" style="color:white;background-color: darkseagreen">
+                                Search
+                            </button>
+                            <button id="reset" onclick="reset()" type="button" class="btn btn-light" style="color:white;background-color: darkgray">
+                                Reset
+                            </button>
+                        </div>
                         <p id="warning" color="red"></p>
                     </div>
                 </div>
@@ -114,7 +117,7 @@
                         <p class="card-text">{{params[1][2]}}</p>
                     </div>
                 </div>
-                <div class="card border-dark mb-3 card-style-sm" style="width:166px">
+                <div class="card border-dark mb-3 card-style-sm" style="width:165px">
                     <div class="card-header">Avg Meters Covered</div>
                     <div class="card-body text-dark" style="padding-bottom: 0">
                         <p class="card-text">{{params[1][3]}} </p>
@@ -123,7 +126,7 @@
             </div>
             <div>
                 <div class="card" style="color:white; display:inline-block; margin-left: 10px;">
-                    <div class="card-body">
+                    <div class="card-body" style="padding-bottom: 0rem;padding-top: .8rem;">
                         <div class="chart" id="map" style="display:inline-block; background:white;">
                             <script>
                                 var graphs_2 = {{params[0][1] | safe}};
@@ -131,6 +134,8 @@
                             </script>
                         </div>
                     </div>
+                    <a href="/getData?data_type='map'"  title="Download"><i style="color: lightgray" title="Download" class="material-icons">get_app</i><span
+                            class="icon-text"></span></a></span>
                 </div>
             </div>
         </div>
@@ -148,12 +153,12 @@
                 </a><br>
                 <a href="/references" title="References"><i title="References" class="material-icons">book</i><span
                         class="icon-text"></span></span></a><br>
-                <a href="#" title="Contact"><i title="Contact" class="material-icons">contact_page</i><span
+                <a href="/contact" title="Contact"><i title="Contact" class="material-icons">contact_page</i><span
                         class="icon-text"></span><span></span></a>
             </div>
             <div id="main">
                 <div class="card" style="color:white; display:inline-block; margin-left: 10px;">
-                    <div class="card-body">
+                    <div class="card-body" style="padding-bottom: 0rem;padding-top: .8rem;">
                         <div class="chart" id="bar" style="display:inline-block">
                             <script>
                                 var graphs = {{params[0][0] | safe}};
@@ -161,10 +166,12 @@
                             </script>
                         </div>
                     </div>
+                    <a href="/getData?data_type='bar'"  title="Download"><i style="color: lightgray" title="Download" class="material-icons">get_app</i><span
+                            class="icon-text"></span></a></span>
 
                 </div>
                 <div class="card" style="width: 582px; color:white; display:inline-block">
-                    <div class="card-body">
+                    <div class="card-body" style="padding-bottom: 0rem;padding-top: .8rem;">
                         <div class="chart" id="scatter" style="display:inline-block; background:white;">
                             <script>
                                 var graphs_2 = {{params[0][2] | safe}};
@@ -172,6 +179,8 @@
                             </script>
                         </div>
                     </div>
+                    <a href="/getData?data_type='scatter'" title="Download"><i style="color: lightgray" title="Download" class="material-icons">get_app</i><span
+                            class="icon-text"></span></a></span>
                 </div>
             </div>
         </div>
@@ -262,5 +271,15 @@
     document.getElementById("top-link").innerText = "{{params[5] | safe}}!";
 </script>
 
-
+<footer id="footer" class="footer-1" style="padding-top: 60px">
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>census.opportunityproject@census.gov © 2020. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 </html>
