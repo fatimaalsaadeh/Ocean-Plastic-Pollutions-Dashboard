@@ -2,7 +2,7 @@
 Runs the backend for the website.
 
 To run this script, add the hostname as the first argument. For example,
-    python app.py 0.0.0.0
+    python app.py 0.0.0.0 
 """
 
 import json
@@ -31,8 +31,8 @@ try:
     hostname = argv[1]
 except:
     hostname = '0.0.0.0'
-app = Flask(__name__)
 
+app = Flask(__name__)
 
 @app.route('/')
 def index():
@@ -104,7 +104,7 @@ def create_scatter_plot():
             graph_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
             return graph_json
         except pd.io.sql.DatabaseError as e:
-            print(e)
+            app.logger.error(e)
 
 
 def get_years():
@@ -119,7 +119,7 @@ def get_years():
             years = pd.to_datetime(years['years']).dt.year.unique()
             return years
         except pd.io.sql.DatabaseError as e:
-            print(e)
+            app.logger.error(e)
 
 
 def get_locations():
@@ -131,7 +131,7 @@ def get_locations():
             locations = locations['Location'].unique()
             return locations.tolist()
         except pd.io.sql.DatabaseError as e:
-            print(e)
+            app.logger.error(e)
 
 
 @app.route('/get_stats', methods=['GET', 'POST'])
@@ -155,7 +155,7 @@ def get_stats():
                 total_area = str(int(stat.totalArea.values[0]))
             return json.dumps([total_volunteers, count_all, total_items_events_recorded, total_area])
         except pd.io.sql.DatabaseError as e:
-            print(e)
+            app.logger.error(e)
             return json.dumps([0, 0, 0, 0])
         return json.dumps([0, 0, 0, 0])
 
@@ -202,7 +202,7 @@ def get_plastic_top_ten_location(location):
                 return df
             return pd.DataFrame()
         except pd.io.sql.DatabaseError as e:
-            print(e)
+            app.logger.error(e)
             return pd.DataFrame()
 
 
@@ -225,7 +225,7 @@ def get_plastic_top_ten_city(city, country_code):
                 return df
             return pd.DataFrame()
         except pd.io.sql.DatabaseError as e:
-            print(e)
+            app.logger.error(e)
             return pd.DataFrame()
 
 
