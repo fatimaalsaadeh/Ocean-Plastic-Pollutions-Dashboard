@@ -21,22 +21,6 @@ from sys import argv
 
 from organize import *
 
-# title = ""
-# with sqlite3.connect('ocean_plastic.db') as con:
-#     try:
-#         all_data = pd.read_sql('select * from plastic_all_data', con)
-#         top_10 = pd.read_sql('select * from plastic_top_10', con)
-#         entangled  = pd.read_sql('select * from entangled_animals', con)
-#     except pd.io.sql.DatabaseError:
-#         entangled = pd.read_csv("EntangledAnimals.csv")
-#         entangled.to_sql('entangled_animals', con)
-#         all_data = pd.read_csv("all-cleanups.csv")
-#         all_data.to_sql('plastic_all_data', con)
-#         print('Added', len(all_data), 'rows to all_data table')
-#         top_10 = pd.read_csv("https://opendata.arcgis.com/datasets/7afcc89e5a0f4c339ddf7b4bf6fabe3d_0.csv")
-#         top_10.to_sql('plastic_top_10', con)
-#         print('Added', len(top_10), 'rows to plastic_top_10 table')
-
 try:
     hostname = argv[1]
 except:
