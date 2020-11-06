@@ -1,3 +1,8 @@
+/*Dark mode*/
+.dark {
+    background-color: black;
+}
+
 .card-style-sm {
     width: 156px;
     height: 108px;
@@ -93,9 +98,6 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0!important;
     font-size: small;
     font-weight: 600;
-}
-.card{
-    box-shadow: 2px 2px 2px lightgrey;
 }
 .sidebar {
     padding-top: 10px;

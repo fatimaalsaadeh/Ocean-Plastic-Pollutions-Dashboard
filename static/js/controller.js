@@ -61,6 +61,36 @@ $(document).ready(function () {
         dataHoverInfoBox(data)
     });
 
+
+    // we want to let the user turn dark mode on and off
+    document.getElementById('toggle-dark-mode').onclick = () => {
+        const page = document.getElementById('page');
+        if (document.body.style.backgroundColor == 'black') {
+            document.body.style.backgroundColor = 'whitesmoke';
+            for (let card of document.getElementsByClassName('card')) {
+                card.style.backgroundColor = 'white';
+                card.style.color = 'navy';
+            }
+            for (let card of document.getElementsByClassName('card-text')) {
+                card.style.color = 'navy';
+            }
+            for (let label of document.getElementsByTagName('label')) {
+                label.style.color = 'navy';
+            }
+        } else {
+            document.body.style.backgroundColor = 'black';
+            for (let card of document.getElementsByClassName('card')) {
+                card.style.backgroundColor = 'black';
+                card.style.color = 'white';
+            }
+            for (let card of document.getElementsByClassName('card-text')) {
+                card.style.color = 'white';
+            }
+            for (let label of document.getElementsByTagName('label')) {
+                label.style.color = 'white'
+            }
+        }
+    };
 });
 
 function dataHoverInfoBox(data){

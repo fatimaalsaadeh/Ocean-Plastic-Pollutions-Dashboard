@@ -35,8 +35,8 @@
         var title = {{params[4] | safe}}
     </script>
 </head>
-<body style="background-color: whitesmoke;">
-<div class="container" style="display: flex; flex-direction: column;">
+<body style="background-color: whitesmoke;" >
+<div id="page" class="container" style="display: flex; flex-direction: column;">
     <div style="display: none">
         <p id = "city-l" style="display: none">{{params[6] | safe}}</p>
         <p id = "country-l" style="display: none">{{params[7] | safe}}</p>
@@ -144,17 +144,34 @@
     <div class="row">
         <div>
             <div id="mySidebar" class="sidebar">
-                <div href="/" title="Statistics Page" class="sidebar-div"><span title="Statistics Page"><i class="material-icons">insert_chart_outlined</i><span
-                        class="icon-text"></span></span></div><br>
-                <div onclick="showMap()" title="Events Near Me" class="sidebar-div"><span title="Events Near Me"><i class="material-icons">near_me</i><span
-                        class="icon-text"></span></span></div><br>
-                <a href="/organize" title="Cleanup Events"><i title="Cleanup Events" class="material-icons">event</i><span
-                        class="icon-text"></span></a></span>
+                <div href="/" title="Statistics Page" class="sidebar-div">
+                    <span title="Statistics Page">
+                        <i class="material-icons">insert_chart_outlined</i>
+                        <span class="icon-text"></span>
+                    </span>
+                </div><br>
+                <div onclick="showMap()" title="Events Near Me" class="sidebar-div">
+                    <span title="Events Near Me">
+                        <i class="material-icons">near_me</i>
+                        <span class="icon-text"></span>
+                    </span>
+                </div><br>
+                <a href="/organize" title="Cleanup Events">
+                    <i title="Cleanup Events" class="material-icons">event</i>
+                    <span class="icon-text"></span>
                 </a><br>
-                <a href="/references" title="References"><i title="References" class="material-icons">book</i><span
-                        class="icon-text"></span></span></a><br>
-                <a href="/contact" title="Contact"><i title="Contact" class="material-icons">contact_page</i><span
-                        class="icon-text"></span><span></span></a>
+                <a href="/references" title="References">
+                    <i title="References" class="material-icons">book</i>
+                    <span class="icon-text"></span>
+                </a><br>
+                <a href="/contact" title="Contact">
+                    <i title="Contact" class="material-icons">contact_page</i>
+                    <span class="icon-text"></span>
+                </a><br>
+                <a href="#" id="toggle-dark-mode" title="Toggle dark mode">
+                    <i title="Contact" class="material-icons">nights_stay</i>
+                    <span class="icon-text"></span>
+                </a>
             </div>
             <div id="main">
                 <div class="card" style="color:white; display:inline-block; margin-left: 10px;">
