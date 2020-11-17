@@ -1,16 +1,11 @@
-/*Dark mode*/
+:root {
+    --sidebar-width: 5.5em;
+}
+
 .dark {
     background-color: black;
 }
 
-.card-style-sm {
-    width: 156px;
-    height: 108px;
-    background-color: white;
-    padding: 15px;
-    margin: 10px;
-    display: inline-block !important;
-}
 body {
     font-family: 'Quicksand', sans-serif !important;
     font-weight: 300;
@@ -19,119 +14,47 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
 }
-.card-style-bg {
-    width: 400px;
-    height: 500px;
-    background-color: white;
-    padding: 15px;
-    margin: 10px;
-    display: inline-block
+
+img {
+    max-width: 100%;
 }
 
-#body-row {
-    margin-left:0;
-    margin-right:0;
-}
-#sidebar-container {
-    height: 1000px;
-    background-color: #333;
-    padding: 0;
+.card-style-sm {
+    display: inline-block !important;
 }
 
-/* Sidebar sizes when expanded and expanded */
-.sidebar-expanded {
-    width: 230px;
-}
-.sidebar-collapsed {
-    width: 60px;
-}
-
-/* Menu item*/
-#sidebar-container .list-group a {
-    height: 50px;
-    color: white;
-}
-
-/* Submenu item*/
-#sidebar-container .list-group .sidebar-submenu a {
-    height: 45px;
-    padding-left: 30px;
-}
-.sidebar-submenu {
-    font-size: 0.9rem;
-}
-
-/* Separators */
-.sidebar-separator-title {
-    background-color: #333;
-    height: 35px;
-}
-.sidebar-separator {
-    background-color: #333;
-    height: 25px;
-}
-.logo-separator {
-    background-color: #333;
-    height: 60px;
-}
-
-/* Closed submenu icon */
-#sidebar-container .list-group .list-group-item[aria-expanded="false"] .submenu-icon::after {
-    content: " \f0d7";
-    font-family: FontAwesome;
-    display: inline;
-    text-align: right;
-    padding-left: 10px;
-}
-/* Opened submenu icon */
-#sidebar-container .list-group .list-group-item[aria-expanded="true"] .submenu-icon::after {
-    content: " \f0da";
-    font-family: FontAwesome;
-    display: inline;
-    text-align: right;
-    padding-left: 10px;
-}
-.fa{
-    color:white !important;
-}
-.card-header{
-    padding: 0!important;
-    font-size: small;
-    font-weight: 600;
-}
 .sidebar {
-    padding-top: 10px;
-    position: absolute;
-    width: 85px;
-    height: 1500px;
-    color: white;
-    z-index: 1;
+    position: fixed;
     top: 0;
     left: 0;
+
+    margin-right: 6em;
+    padding-top: 1vh;
+    width: var(--sidebar-width);
+    height: 100%;
+
     background-color: #0c1955;
-    transition: 0.5s;
+    color: white;
     white-space: nowrap;
 }
 
 .sidebar a {
-    padding: 8px 8px 8px 32px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 5em;
     color: white;
     display: block;
-    transition: 0.3s;
 }
 
 .sidebar a:hover {
     color: lightskyblue;
 }
 
-.sidebar .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
+.sidebar a i {
+    font-size: calc(var(--sidebar-width) * 0.2);
+}
+
+#content {
+    margin-left: var(--sidebar-width);
 }
 
 .material-icons,
@@ -143,42 +66,6 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 3px;
 }
 
-#main {
-    transition: margin-left .5s;
+.modal {
+    padding-right: 75vw !important;
 }
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-
-@media screen and (max-height: 450px) {
-    .sidebar {
-        padding-top: 15px;
-    }
-    .sidebar a {
-        font-size: 18px;
-    }
-}
-.modal{
-    padding-right: 730px !important;
-}
-.sidebar-div{
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: white;
-    display: block;
-    transition: 0.3s;
-}
-#twitter-widget-0{
-    float: right!important;
-    margin-top:20px !important;
-}
-
-.footer-1{	padding-top: 530px;}
-footer ul{	padding-left: 0;	list-style: none;}
-.footer-copyright {padding: 5px 0;}
-.footer-copyright .logo {    display: inherit;}
-.footer-copyright nav {    float: right;    margin-top: 5px;}
-.footer-copyright nav ul {	list-style: none;	margin: 0;	padding: 0;}
-.footer-copyright nav ul li {	border-left: 1px solid #505050;	display: inline-block;	line-height: 12px;	margin: 0;	padding: 0 8px;}
-.footer-copyright nav ul li a{	color: #969696;}
-.footer-copyright nav ul li:first-child {	border: medium none;	padding-left: 0;}
-.footer-copyright p {	color: #969696;	margin: 2px 0 0;}
