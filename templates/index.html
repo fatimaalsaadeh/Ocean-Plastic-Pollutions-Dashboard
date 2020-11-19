@@ -42,9 +42,11 @@
         <p id = "country-l" style="display: none">{{params[7] | safe}}</p>
         <p id = "beach-l" style="display: none"></p>
     </div>
+    <button onclick="tutorial()">Show tutorial</button>
+    <div id="toast-messagebox"></div>
     <div class="row flex-display">
         <div class="four columns">
-            <div class="card card-style-bg" style="height: 507px;">
+            <div id="filters" class="card card-style-bg" style="height: 507px;">
                 <div class="card-body" style="padding: 0 !important;">
                     <div>
                         <input class="range-slider" type="hidden" value="25,75">
@@ -97,7 +99,7 @@
             </div>
         </div>
         <div class="eight columns">
-            <div>
+            <div id="stats">
                 <div class="card border-dark mb-3 card-style-sm" style="width:139px">
                     <div class="card-header">Total Volunteers</div>
                     <div class="card-body text-dark" style="padding-bottom: 0; display: inline-flex">

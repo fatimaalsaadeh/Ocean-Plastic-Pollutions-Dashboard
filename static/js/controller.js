@@ -1,3 +1,25 @@
+function tutorial() {
+    const toastbox = document.getElementById("toast-messagebox");
+    const explain = (cards, messages) => {
+        if (cards.length > 0) {
+            const card = document.getElementById(cards[0]);
+            const originalBackgroundColor = card.style.backgroundColor;
+            card.style.backgroundColor = 'orange';
+            toastbox.className = 'show';
+            toastbox.innerHTML = messages[0];
+            setTimeout(() => { 
+                toastbox.className = toastbox.className.replace('show', ''); 
+                card.style.backgroundColor = originalBackgroundColor;
+                setTimeout(() => explain(cards.slice(1), messages.slice(1)), 1000);
+            }, 5000);
+        }
+    }
+    const cards = ['filters', 'stats'];
+    const messages = ['Select which cleanups to view based on their time, location, and organisation!',
+                      'See statistics for the cleanups you selected!'];
+    explain(cards, messages);
+}
+
 var mapData = null;
 var scatterData = null;
 var barData = null;
