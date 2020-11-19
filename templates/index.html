@@ -42,7 +42,6 @@
         <p id = "country-l" style="display: none">{{params[7] | safe}}</p>
         <p id = "beach-l" style="display: none"></p>
     </div>
-    <button onclick="tutorial()">Show tutorial</button>
     <div id="toast-messagebox"></div>
     <div class="row flex-display">
         <div class="four columns">
@@ -127,7 +126,7 @@
                 </div>
             </div>
             <div>
-                <div class="card" style="color:white; display:inline-block; margin-left: 10px;">
+                <div id="map-card" class="card" style="color:white; display:inline-block; margin-left: 10px;">
                     <div class="card-body" style="padding-bottom: 0rem;padding-top: .8rem;">
                         <div class="chart" id="map" style="display:inline-block; background:white;">
                             <script>
@@ -174,9 +173,15 @@
                     <i title="Contact" class="material-icons">nights_stay</i>
                     <span class="icon-text"></span>
                 </a>
+                <div onclick="tutorial()" title="Show tutorial" class="sidebar-div">
+                    <span title="Show tutorial">
+                        <i class="material-icons">help</i>
+                        <span class="icon-text"></span>
+                    </span>
+                </div><br>
             </div>
             <div id="main">
-                <div class="card" style="color:white; display:inline-block; margin-left: 10px;">
+                <div id="types-of-items-collected" class="card" style="color:white; display:inline-block; margin-left: 10px;">
                     <div class="card-body" style="padding-bottom: 0rem;padding-top: .8rem;">
                         <div class="chart" id="bar" style="display:inline-block">
                             <script>
@@ -189,7 +194,7 @@
                             class="icon-text"></span></a></span>
 
                 </div>
-                <div class="card" style="width: 582px; color:white; display:inline-block">
+                <div id="items-collected" class="card" style="width: 582px; color:white; display:inline-block">
                     <div class="card-body" style="padding-bottom: 0rem;padding-top: .8rem;">
                         <div class="chart" id="scatter" style="display:inline-block; background:white;">
                             <script>

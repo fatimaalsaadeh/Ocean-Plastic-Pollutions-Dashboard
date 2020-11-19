@@ -14,11 +14,14 @@ function tutorial() {
             }, 5000);
         }
     }
-    const cards = ['filters', 'stats'];
+    const cards = ['filters', 'stats', 'map-card', 'types-of-items-collected', 'items-collected'];
     const messages = ['Select which cleanups to view based on their time, location, and organisation!',
-                      'See statistics for the cleanups you selected!'];
+                      'See statistics for the cleanups you selected!',
+                      'Look at the cleanups you selected on a map!',
+                      'See what kinds of items were collected in that state/province!',
+                      'See how many items were collected each month!'];
     explain(cards, messages);
-}
+};
 
 var mapData = null;
 var scatterData = null;

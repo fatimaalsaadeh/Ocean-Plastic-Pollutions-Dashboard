@@ -14,3 +14,4 @@ __pycache__/app.cpython-37.pyc
 __pycache__/app.cpython-38.pyc
 __pycache__/organize.cpython-37.pyc
 ocean_plastic.db
+*.log
