@@ -3,13 +3,13 @@ function tutorial() {
     const explain = (cards, messages) => {
         if (cards.length > 0) {
             const card = document.getElementById(cards[0]);
-            const originalBackgroundColor = card.style.backgroundColor;
-            card.style.backgroundColor = 'orange';
+            const originalBackground = card.style.background;
+            card.style.background = 'linear-gradient(#E7DCF5, #E4D3EB)';
             toastbox.className = 'show';
             toastbox.innerHTML = messages[0];
             setTimeout(() => { 
                 toastbox.className = toastbox.className.replace('show', ''); 
-                card.style.backgroundColor = originalBackgroundColor;
+                card.style.background = originalBackground;
                 setTimeout(() => explain(cards.slice(1), messages.slice(1)), 1000);
             }, 5000);
         }
