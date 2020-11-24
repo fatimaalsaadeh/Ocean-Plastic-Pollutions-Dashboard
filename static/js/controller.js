@@ -91,6 +91,7 @@ $(document).ready(function () {
     document.getElementById('toggle-dark-mode').onclick = () => {
         const page = document.getElementById('page');
         if (document.body.style.backgroundColor == 'black') {
+            document.body.className = '';
             document.body.style.backgroundColor = 'whitesmoke';
             for (let card of document.getElementsByClassName('card')) {
                 card.style.backgroundColor = 'white';
@@ -103,6 +104,7 @@ $(document).ready(function () {
                 label.style.color = 'navy';
             }
         } else {
+            document.body.className = 'dark';
             document.body.style.backgroundColor = 'black';
             for (let card of document.getElementsByClassName('card')) {
                 card.style.backgroundColor = 'black';

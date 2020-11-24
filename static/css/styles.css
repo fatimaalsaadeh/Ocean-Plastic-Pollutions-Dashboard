@@ -3,6 +3,10 @@
     background-color: black;
 }
 
+.dark h1, h2, h3, h4, h5, h6 {
+    color: white !important;  /*We have to put the important tag because some of the h6 elements have their text color set manually*/
+}
+
 .card-style-sm {
     width: 156px;
     height: 108px;

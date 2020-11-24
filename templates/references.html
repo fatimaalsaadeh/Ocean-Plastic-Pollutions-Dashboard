@@ -45,6 +45,10 @@
                         class="icon-text"></span></span></a><br>
                 <a href="/contact" title="Contact"><i title="Contact" class="material-icons">contact_page</i><span
                         class="icon-text"></span><span></span></a>
+                <a href="#" id="toggle-dark-mode" title="Toggle dark mode">
+                    <i title="Toggle Dark Mode" class="material-icons">nights_stay</i>
+                    <span class="icon-text"></span>
+                </a><br>
             </div>
         </div>
     </div>
@@ -166,6 +170,39 @@
         </div>
     </div>
 </div>
+<script>
+    // we want to let the user turn dark mode on and off
+    document.getElementById('toggle-dark-mode').onclick = () => {
+        const page = document.getElementById('page');
+        if (document.body.style.backgroundColor == 'black') {
+            document.body.className = '';
+            document.body.style.backgroundColor = 'whitesmoke';
+            for (let card of document.getElementsByClassName('card')) {
+                card.style.backgroundColor = 'white';
+                card.style.color = 'navy';
+            }
+            for (let card of document.getElementsByClassName('card-text')) {
+                card.style.color = 'navy';
+            }
+            for (let label of document.getElementsByTagName('label')) {
+                label.style.color = 'navy';
+            }
+        } else {
+            document.body.className = 'dark';
+            document.body.style.backgroundColor = 'black';
+            for (let card of document.getElementsByClassName('card')) {
+                card.style.backgroundColor = 'black';
+                card.style.color = 'white';
+            }
+            for (let card of document.getElementsByClassName('card-text')) {
+                card.style.color = 'white';
+            }
+            for (let label of document.getElementsByTagName('label')) {
+                label.style.color = 'white'
+            }
+        }
+    };
+</script>
 </body>
 <footer id="footer" class="footer-1" style=" padding-top: 45px;">
     <div class="footer-copyright">
