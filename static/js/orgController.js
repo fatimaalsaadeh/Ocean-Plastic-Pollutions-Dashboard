@@ -1,3 +1,27 @@
+function tutorial() {
+    const toastbox = document.getElementById("toast-messagebox");
+    const explain = (cards, messages) => {
+        if (cards.length > 0) {
+            const card = document.getElementById(cards[0]);
+            const originalBackground = card.style.background;
+            card.style.background = 'linear-gradient(#E7DCF5, #E4D3EB)';
+            toastbox.className = 'show';
+            toastbox.innerHTML = messages[0];
+            setTimeout(() => { 
+                toastbox.className = toastbox.className.replace('show', ''); 
+                card.style.background = originalBackground;
+                setTimeout(() => explain(cards.slice(1), messages.slice(1)), 1000);
+            }, 5000);
+        }
+    }
+    const cards = ['filters', 'stats', 'map-card', 'items-collected'];
+    const messages = ['Select which cleanups to view based on their time, location, and organisation!',
+                      'See statistics for the cleanups you selected!',
+                      'Look at the cleanups you selected on a map!',
+                      'See how many items were collected each month!'];
+    explain(cards, messages);
+};
+
 $(document).ready(function () {
     // we want to let the user turn dark mode on and off
     document.getElementById('toggle-dark-mode').onclick = () => {
