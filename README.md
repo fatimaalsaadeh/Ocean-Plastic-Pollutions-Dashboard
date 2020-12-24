@@ -1,3 +1,4 @@
 # ocean_plastic_pollution
-arima :https://www.investopedia.com/terms/a/autoregressive-integrated-moving-average-arima.asp#:~:text=An%20autoregressive%20integrated%20moving%20average%20model%20is%20a%20form%20of,relative%20to%20other%20changing%20variables.&text=Autoregression%20(AR)%20refers%20to%20a,lagged%2C%20or%20prior%2C%20values.
-seasonal decomp : https://miningthedetails.com/blog/r/TimeSeriesDecomposition/#:~:text=Time%20series%20decomposition%20using%20moving%20averages%20is%20a%20fast%20way,is%20a%20good%20starting%20point.
+This project was done to solve a problem statement in the opportunity project - census.
+Analyzing and visualizing worldwide beach cleanup events to help volunteers find the nearest beach cleanup event to their location and organizers to forecast the increase of cleanup events in the united states, plan an even it and share it.
+Please find the link to the project : http://ocean-plastic-pollution.herokuapp.com/
